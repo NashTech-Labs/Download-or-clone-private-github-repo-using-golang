@@ -4,6 +4,8 @@ package main
 // importing the required packages for the code.
 
 import (
+
+
     "fmt"
     "os"
     "time"
@@ -17,20 +19,22 @@ import (
 
 )
 
+// define the global varibel which will be used in the main function.
+
 var (
 
-    username        = "muzakkirsaifi123"
+    username        = "<github username >"
 
-    repositoryName  = "terratest-for-terraform"
+    repositoryName  = "<repo - name>"
 
-    destinationPath = "../" // Global variable for destination path
+    destinationPath = "../" 
 
-    folderName      = "module-terraform"                               // Global variable for folder name
+    folderName      = "<path>"            
 
 )
 
 
-
+// function to clone the private repo 
 
 func ClonePrivateRepo(token string, done chan bool) error {
 
@@ -44,17 +48,9 @@ func ClonePrivateRepo(token string, done chan bool) error {
 
     }
 
-
-
-
     repoPath := filepath.Join(destinationPath, folderName)
 
-
-
-
     repoURL := fmt.Sprintf("https://github.com/%s/%s.git", username, repositoryName)
-
-
 
     _, err = git.PlainClone(repoPath, false, &git.CloneOptions{
 
@@ -65,19 +61,14 @@ func ClonePrivateRepo(token string, done chan bool) error {
         ReferenceName: plumbing.ReferenceName("refs/heads/<branch>"), // or specify the branch you want to clone
 
     })
-
-
-
     done <- true
-
-
-
-
     return err
 
 }
 
 
+
+//function to delete the downloaded repository
 
 
 func DeleteClonedRepo() error {
@@ -95,21 +86,20 @@ func DeleteClonedRepo() error {
 
     return nil
 
+
+
 }
+
+
+
+// main function where we call other functions.
 
 func main() {
 
     token := "< token >"
-
-
-
-
     // Create a channel to signal the completion of the cloning process
 
     done := make(chan bool)
-
-
-
 
     // Start the cloning process
 
@@ -122,20 +112,11 @@ func main() {
 
     <-done
 
-
-
-
     fmt.Println("Repository cloned successfully!")
-
-
-
 
     // Continue with other operations if needed
 
     time.Sleep(10 * time.Second) // Sleep for an additional 2 seconds to allow any pending operations to complete
-
-
-
 
     // Delete the cloned repository
 
@@ -150,9 +131,6 @@ func main() {
         fmt.Println("Cloned repository deleted.")
 
     }
-
-
-
 
     fmt.Println("Finished.")
 
