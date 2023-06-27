@@ -62,7 +62,7 @@ func ClonePrivateRepo(token string, done chan bool) error {
 
         Auth:          &http.BasicAuth{Username: "token", Password: token},
 
-        ReferenceName: plumbing.ReferenceName("refs/heads/232323"), // or specify the branch you want to clone
+        ReferenceName: plumbing.ReferenceName("refs/heads/<branch>"), // or specify the branch you want to clone
 
     })
 
